@@ -25,14 +25,19 @@ Pongball::Pongball()
 void Pongball::setup(){
 
     mPosition=Vec2f(getWindowWidth()/2.0f,getWindowHeight()/2.0f);
-    mAcceleration = Vec2f(1,1);
-    mDecay = 0.5f;
+    mDirection = Vec2f(randFloat(0,1),randFloat(0,1));
+    mSpeed = 1.2f;
 }
 void Pongball::update(){
-  
-    mVelocity += mAcceleration;
-    mPosition += mVelocity;
-    mVelocity *= mDecay;
+    if(mPosition.x<0 ||mPosition.x> getWindowWidth() ){
+        mDirection.x*=-1;
+    }
+    if(mPosition.y<0 ||mPosition.y> getWindowHeight() ){
+        mDirection.y*=-1;
+    }
+    
+    mPosition += mDirection*mSpeed;
+
 
 }
 void Pongball::draw(){

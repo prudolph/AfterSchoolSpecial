@@ -20,8 +20,8 @@ public:
     
 
     cinder::Vec2f mPosition;
-
-    cinder::Vec2f mVelocity,
+    float mSpeed;
+    cinder::Vec2f mDirection,
                   mAcceleration;
     
     float           mDecay;

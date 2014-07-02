@@ -17,6 +17,8 @@
 		7FC743427C964013B1B49404 /* BodyPongApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C02C42ECEBD943B1900DDD56 /* BodyPongApp.cpp */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		ACE79F837BEB423CA6559BF2 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA66759A61544798A2310140 /* CinderApp.icns */; };
+		C36686ED1964733B0003C560 /* ActivityController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C36686EB1964733B0003C560 /* ActivityController.cpp */; };
+		C36686EF19647E490003C560 /* Phidget21.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36686EE19647E490003C560 /* Phidget21.framework */; };
 		C38C76C719621D360011E485 /* PongBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C38C76C519621D360011E485 /* PongBall.cpp */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,9 @@
 		8D1107320486CEB800E47090 /* BodyPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BodyPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA66759A61544798A2310140 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
 		C02C42ECEBD943B1900DDD56 /* BodyPongApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BodyPongApp.cpp; path = ../src/BodyPongApp.cpp; sourceTree = "<group>"; };
+		C36686EB1964733B0003C560 /* ActivityController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActivityController.cpp; sourceTree = "<group>"; };
+		C36686EC1964733B0003C560 /* ActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityController.h; sourceTree = "<group>"; };
+		C36686EE19647E490003C560 /* Phidget21.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Phidget21.framework; path = ../../../../../../../Library/Frameworks/Phidget21.framework; sourceTree = "<group>"; };
 		C38C76C519621D360011E485 /* PongBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PongBall.cpp; sourceTree = "<group>"; };
 		C38C76C619621D360011E485 /* PongBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PongBall.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C36686EF19647E490003C560 /* Phidget21.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
 				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
@@ -73,6 +79,8 @@
 				C02C42ECEBD943B1900DDD56 /* BodyPongApp.cpp */,
 				C38C76C519621D360011E485 /* PongBall.cpp */,
 				C38C76C619621D360011E485 /* PongBall.h */,
+				C36686EB1964733B0003C560 /* ActivityController.cpp */,
+				C36686EC1964733B0003C560 /* ActivityController.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -112,6 +120,7 @@
 		29B97314FDCFA39411CA2CEA /* BodyPong */ = {
 			isa = PBXGroup;
 			children = (
+				C36686EE19647E490003C560 /* Phidget21.framework */,
 				01B97315FEAEA392516A2CEA /* Blocks */,
 				29B97315FDCFA39411CA2CEA /* Headers */,
 				080E96DDFE201D6D7F000001 /* Source */,
@@ -212,6 +221,7 @@
 			files = (
 				7FC743427C964013B1B49404 /* BodyPongApp.cpp in Sources */,
 				C38C76C719621D360011E485 /* PongBall.cpp in Sources */,
+				C36686ED1964733B0003C560 /* ActivityController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,13 +280,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = i386;
-				CINDER_PATH = ../../../cinder_0.8.5_mac;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CINDER_PATH = ../../../../cinder_0.8.5_mac;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks/;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/boost\"";
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/Phidget21.framework/Headers,
+					"\"$(CINDER_PATH)/boost\"",
+				);
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include";
@@ -287,13 +302,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = i386;
-				CINDER_PATH = ../../../cinder_0.8.5_mac;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CINDER_PATH = ../../../../cinder_0.8.5_mac;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks/;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/boost\"";
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/Phidget21.framework/Headers,
+					"\"$(CINDER_PATH)/boost\"",
+				);
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include";
