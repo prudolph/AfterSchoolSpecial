@@ -14,13 +14,13 @@ class Paddle{
 public:
     Paddle();
     
-    void setup();
-    void update();
+    void setup(cinder::Vec2f pos);
+    void update(float yVal);
     void draw();
     
 
-    cinder::Vec2f mPosition;
-
+    cinder::Vec2f mPosition,mSize;
+    
     
   
 };

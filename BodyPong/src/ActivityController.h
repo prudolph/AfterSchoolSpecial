@@ -16,23 +16,26 @@ public:
 
     
 	ActivityController();
-
 	~ActivityController();
 
     
-	void										setup();
-	void										setupSensor();
-	void										shutdownSensor();
-	void										update();
+	void setup();
+	void setupSensors();
+	void shutdownSensor();
+	void update();
     
     
 	CPhidgetInterfaceKitHandle ifKit;
-	void pollSensor();
+
 	
+    float getLeftSensorValue(){return mLeftSensorValue;};
+    
+    float getRightSensorValue(){return mRightSensorValue;};
+    
 private:
 		
 
-    
+    float mLeftSensorValue,mRightSensorValue;
     
 	int		mCurrentSensor;
 	

@@ -31,13 +31,12 @@ ActivityController:: ~ActivityController(){
 
 void ActivityController::setup(){
 	
-    
-	setupSensor();
+	setupSensors();
 }
 
 
 
-void ActivityController::setupSensor(){
+void ActivityController::setupSensors(){
     
 	
 	//Declare an InterfaceKit handle
@@ -73,13 +72,15 @@ void ActivityController::shutdownSensor(){
 }
 
 
-void ActivityController::pollSensor(){
-	 
-	 
-	int currentDistanceReading;
+
+
+void ActivityController::update(){
+    
+    int currentDistanceReading;
     //Turn the sensor on
     CPhidgetInterfaceKit_setOutputState(ifKit, mCurrentSensor, 1);
     sleep(0.001);//Need to give the senor time to take a reading
+    
     //Get the distance
     CPhidgetInterfaceKit_getSensorValue(ifKit, mCurrentSensor, &currentDistanceReading);
 	
@@ -88,16 +89,12 @@ void ActivityController::pollSensor(){
     
     console()<<"Sensor "<< mCurrentSensor<< "Value :"<< currentDistanceReading<<endl;
     
+    if(mCurrentSensor == 0)     mLeftSensorValue =currentDistanceReading/10;
+    else if (mCurrentSensor ==1)mRightSensorValue = currentDistanceReading/10;
     
-      
-    //mCurrentSensor++;
-   // if (mCurrentSensor >1)mCurrentSensor = 0;
-	
-}
-
-void ActivityController::update(){
-    
-	pollSensor();
+    //Swithc to other sensor
+    mCurrentSensor++;
+     if (mCurrentSensor >1)mCurrentSensor = 0;
 	    
 }
 

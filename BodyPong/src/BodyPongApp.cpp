@@ -25,7 +25,7 @@ class BodyPongApp : public AppNative {
 	void draw();
     ActivityController activityController;
     Pongball ball;
-    Paddle LeftPaddle,rightPaddle;
+    Paddle leftPaddle,rightPaddle;
     Vec2f position;
 };
 
@@ -36,6 +36,9 @@ void BodyPongApp::setup()
     
     position=Vec2f(0,0);
     ball.setup();
+    leftPaddle.setup(Vec2f(10,10));
+    rightPaddle.setup(Vec2f(500,10));
+    
 }
 
 void BodyPongApp::mouseDown( MouseEvent event )
@@ -44,9 +47,16 @@ void BodyPongApp::mouseDown( MouseEvent event )
 
 void BodyPongApp::update()
 {
-     activityController.update();
+    activityController.update();
+    
     ball.update();
     position = position+Vec2f(1,1);
+    
+    float leftValue =activityController.getLeftSensorValue();
+    leftPaddle.update(leftValue);
+    
+    float rightValue = activityController.getRightSensorValue();
+    rightPaddle.update(rightValue);
     
 }
 
@@ -55,6 +65,8 @@ void BodyPongApp::draw()
 	// clear out the window with black
 	gl::clear( Color( 0, 0, 0 ) );
     ball.draw();
+    leftPaddle.draw();
+    rightPaddle.draw();
 }
 
 CINDER_APP_NATIVE( BodyPongApp, RendererGl )
