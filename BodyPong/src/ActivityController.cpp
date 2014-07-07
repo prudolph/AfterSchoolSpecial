@@ -90,8 +90,8 @@ void ActivityController::pollSensor(){
     
     
       
-    mCurrentSensor++;
-    if (mCurrentSensor >1)mCurrentSensor = 0;
+    //mCurrentSensor++;
+   // if (mCurrentSensor >1)mCurrentSensor = 0;
 	
 }
 

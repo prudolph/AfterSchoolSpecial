@@ -2,7 +2,16 @@
 #include "cinder/gl/gl.h"
 
 #include "PongBall.h"
+#include "Paddle.h"
+//For Sensors
 #include "ActivityController.h"
+
+//For Physics
+//#include "Box2D/Box2D.h"
+//#include "Box2dController.h"
+
+
+
 
 using namespace ci;
 using namespace ci::app;
@@ -16,6 +25,7 @@ class BodyPongApp : public AppNative {
 	void draw();
     ActivityController activityController;
     Pongball ball;
+    Paddle LeftPaddle,rightPaddle;
     Vec2f position;
 };
 
