@@ -21,6 +21,8 @@ public class BallController : MonoBehaviour {
 	}
 
 	void Reset(){
+		transform.position = originalPos;
+		transform.rotation = originalRot;
 		cSpeed = originalSpeed;
 		rigidbody.velocity = Vector3.zero;
 		rigidbody.AddForce(force,0,0);
@@ -37,8 +39,8 @@ public class BallController : MonoBehaviour {
 		}
 
 		if (transform.position.y < -4) {
-			transform.position = originalPos;
-			transform.rotation = originalRot;
+
+			NotificationCenter.DefaultCenter.PostNotification(this, "UpdateScore");
 
 			Reset();
 		}

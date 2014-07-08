@@ -47,9 +47,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\NotificationCenter.cs" />
- <Reference Include="Phidget21.NET">
- <HintPath>/Users/kathryn/Sites/AfterSchoolSpecial/BodyPongUnity/Assets/Plugins/Phidget21.NET.dll</HintPath>
- </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

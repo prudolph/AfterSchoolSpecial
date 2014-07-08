@@ -339,7 +339,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: fd4535e19bf454a6eb4f4fa5d7d24560, type: 2}
       propertyPath: m_Constraints
-      value: 118
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd4535e19bf454a6eb4f4fa5d7d24560, type: 2}
@@ -672,7 +672,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: fd4535e19bf454a6eb4f4fa5d7d24560, type: 2}
       propertyPath: m_Constraints
-      value: 118
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd4535e19bf454a6eb4f4fa5d7d24560, type: 2}
@@ -851,7 +851,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 118
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &1161076103
 MonoBehaviour:
@@ -1025,7 +1025,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 118
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &1254682100
 GameObject:
@@ -1317,7 +1317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd7dce3f43ca4634a3181d2bcd2f378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 1874373580}
+  ball: {fileID: 1409605288}
+  ballController: {fileID: 1409605294}
 --- !u!4 &1671470828
 Transform:
   m_ObjectHideFlags: 0
@@ -1454,7 +1456,7 @@ GameObject:
   - 4: {fileID: 1874373581}
   - 132: {fileID: 1874373580}
   m_Layer: 0
-  m_Name: GUI Text
+  m_Name: scoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

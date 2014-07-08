@@ -4,12 +4,15 @@ using System.Collections;
 public class BodyPongController : MonoBehaviour {
 
 	public GUIText scoreText;
-	int player1Score;
-	int player2Score;
+	public GameObject ball;
+	public BallController ballController;
+	int player1Score = 0;
+	int player2Score = 0;
+
 
 	// Use this for initialization
 	void Start () {
-	
+		NotificationCenter.DefaultCenter.AddObserver (this, "UpdateScore");
 	}
 	
 	// Update is called once per frame
@@ -18,6 +21,12 @@ public class BodyPongController : MonoBehaviour {
 	}
 
 	public void UpdateScore(){
-		Debug.Log ("you should update the score");
+		Debug.Log (ball.transform.position.x);
+		if (ball.transform.position.x > 0) {
+				player1Score++;
+		} else
+				player2Score++;
+		scoreText.text = "player1 " + player1Score + " player2: " + player2Score;
+
 	}
 }

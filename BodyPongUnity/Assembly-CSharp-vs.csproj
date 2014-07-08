@@ -47,13 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BodyPongController.cs" />
-     <Compile Include="Assets\PhidgetTest.cs" />
      <Compile Include="Assets\Scripts\BallController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\phidgetDemo.cs" />
- <Reference Include="Phidget21.NET">
- <HintPath>/Users/kathryn/Sites/AfterSchoolSpecial/BodyPongUnity/Assets/Plugins/Phidget21.NET.dll</HintPath>
- </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
