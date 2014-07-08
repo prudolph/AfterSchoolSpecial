@@ -35,14 +35,14 @@ public class BallController : MonoBehaviour {
 		if (transform.position.y > maxY) {
 			transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
 		}
+
 		if (transform.position.y < -4) {
 			transform.position = originalPos;
 			transform.rotation = originalRot;
+
 			Reset();
 		}
 	}
 
-	void OnCollision(){
 
-	}
 }

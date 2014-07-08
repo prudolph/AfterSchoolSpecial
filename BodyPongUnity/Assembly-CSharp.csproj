@@ -46,8 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BodyPongController.cs" />
+     <Compile Include="Assets\PhidgetTest.cs" />
      <Compile Include="Assets\Scripts\BallController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\phidgetDemo.cs" />
+ <Reference Include="Phidget21.NET">
+ <HintPath>/Users/kathryn/Sites/AfterSchoolSpecial/BodyPongUnity/Assets/Plugins/Phidget21.NET.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{1754C480-D783-CCCA-5AD8-CB22C45EC12C}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
