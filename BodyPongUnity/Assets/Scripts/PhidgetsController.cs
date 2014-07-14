@@ -4,7 +4,8 @@ using System.Collections;
 using Phidgets; 
 using Phidgets.Events;
 
-public class PlayerController_phidgets: MonoBehaviour {
+public class PhidgetsController: MonoBehaviour {
+
 	InterfaceKit ifkit;
 	int sensorValue=0;
 	public float speed  = 5f;
@@ -59,9 +60,9 @@ public class PlayerController_phidgets: MonoBehaviour {
 			//Debug.Log(ex.Description);
 		}
 		
-		int sensorValueChange = sensorValue - oldsensorValue;
-		Debug.Log(transform.position.z+sensorValueChange);
-		
+		float sensorValueChange = sensorValue/150f;
+		Debug.Log(sensorValueChange);
+
 		transform.Translate( new Vector3(0f,0,transform.position.z +sensorValue));
 		
 	}
