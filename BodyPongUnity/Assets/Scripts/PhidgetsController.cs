@@ -49,6 +49,7 @@ public class PhidgetsController: MonoBehaviour {
 			transform.position = originalPos;	
 			transform.rotation = originalRot;
 		}
+
 		int oldsensorValue = sensorValue;
 		try{ 
 			ifkit.outputs [0] = true;
@@ -63,7 +64,7 @@ public class PhidgetsController: MonoBehaviour {
 		float sensorValueChange = sensorValue/150f;
 		Debug.Log(sensorValueChange);
 
-		transform.Translate( new Vector3(0f,0,transform.position.z +sensorValue));
+		//transform.Translate( new Vector3(0f,0,transform.position.z +sensorValue));
 		
 	}
 }
