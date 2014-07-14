@@ -1,0 +1,106 @@
+
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+@import "compass/css3/border-radius";
+@import "compass/css3/transition";
+
+@font-face {
+    font-family: "Ultramagnetic";
+    src: url(../images/fonts/Ultramagnetic.eot);
+    src: url('../images/fonts/Ultramagnetic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url(../images/fonts/Ultramagnetic.ttf);
+     
+    font-weight:400;
+}
+
+
+$white: #ebe8e3;
+$black: #000000;
+
+$lightBlue: #92b7ad;
+$green: #adb339;
+$teal: #46b399;
+$red: #eb5849;
+$blue: #3a76b5;
+
+$darkGrey: lighten($black, 10);
+$darkMidGrey: lighten($black, 20);
+$grey: lighten($black, 50);
+$lightMidGrey: lighten($black, 70);
+$lightGrey: lighten($black, 90);
+
+$serif: "jubilat", Georgia, serif;
+$sans: "brandon-grotesque", Arial, sans;
+$header: "Ultramagnetic", Impact, Arial, sans;
+
+
+@function em($target, $context: $base-font-size) {
+   @if $target == 0 { @return 0 }
+   @return $target / $context + 0em;
+}
+
+@mixin border-50{
+    @include border-radius(50%, 50%);
+}
+
+@mixin border-0{
+    @include border-radius(0, 0);
+}
+
+
+
+
+@mixin cf {
+    zoom:1; 
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+$width-tablet-portrait: 768px;
+$width-tablet-landscape: 1026px;
+
+@mixin breakpoint-small {
+    @media (max-width: $width-tablet-portrait - 1) {
+        @content;
+    }
+}
+
+@mixin breakpoint-medium {
+    @media (max-width: $width-tablet-landscape - 1) {
+        @content;
+    }
+}
+
+@mixin textShadow{
+     @include text-shadow(rgba($black, 0.75) 1px 1px 1px);
+}
+.ts{
+  @include textShadow;
+}
+
+
+
+
+@mixin ds($color:$black, $left:1px, $top:1px, $spread:3px, $blur:0px){
+    @include box-shadow(rgba($color, 0.65) $left $top $spread $blur);
+}
+    
+
+.ds{
+    @include ds;
+}    
+
+
+.mobile{
+    display: none;
+    @include breakpoint-small{
+        display: block;
+    }
+}
+
