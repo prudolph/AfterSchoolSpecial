@@ -32,10 +32,12 @@ public class PhidgetsController: MonoBehaviour {
 		
 		originalPos = transform.position;
 		originalRot = transform.rotation;
+
+		InvokeRepeating ("UpdateManual", 1f, .25f);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void UpdateManual () {
 		
 		/*
 		if (Input.GetButton (buttonUp)) {
@@ -61,10 +63,10 @@ public class PhidgetsController: MonoBehaviour {
 			//Debug.Log(ex.Description);
 		}
 		
-		float sensorValueChange = sensorValue/150f;
+		float sensorValueChange = sensorValue/400f;
 		Debug.Log(sensorValueChange);
 
-		//transform.Translate( new Vector3(0f,0,transform.position.z +sensorValue));
+		transform.Translate( new Vector3(0f,0,transform.position.z +sensorValue));
 		
 	}
 }
