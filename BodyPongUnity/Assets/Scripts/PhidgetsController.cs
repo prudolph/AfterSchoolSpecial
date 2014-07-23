@@ -14,6 +14,13 @@ public class PhidgetsController: MonoBehaviour {
 	Vector3 originalPos;
 	
 	Quaternion originalRot;
+
+	float maxSensorValue = 960f;
+	float minSesorValue = 50f;
+
+	float minPaddlePos = 0f;
+	float maxPaddlePos = 18f;
+	float offsetPos = -9f;
 	
 	
 	// Use this for initialization
@@ -28,12 +35,12 @@ public class PhidgetsController: MonoBehaviour {
 		{
 			Debug.Log(ex.Description);
 		}
-		ifkit.sensors [0].Sensitivity = 50;
+		ifkit.sensors [0].Sensitivity = 10;
 		
 		originalPos = transform.position;
 		originalRot = transform.rotation;
 
-		InvokeRepeating ("UpdateManual", 1f, .25f);
+		InvokeRepeating ("UpdateManual", 1f, .05f);
 	}
 	
 	// Update is called once per frame
@@ -63,10 +70,21 @@ public class PhidgetsController: MonoBehaviour {
 			//Debug.Log(ex.Description);
 		}
 		
-		float sensorValueChange = sensorValue/400f;
-		Debug.Log(sensorValueChange);
+		//float sensorValueChange = sensorValue/800f;
 
-		transform.Translate( new Vector3(0f,0,transform.position.z +sensorValue));
+
+		float x;
+
+		float sensorPerc = (sensorValue - minSesorValue) / (maxSensorValue - minSesorValue);
+		float paddlePosition = (sensorPerc * (maxPaddlePos - minPaddlePos)) + offsetPos;
+
+
+
+		float nV = paddlePosition;
+
+		Debug.Log("sendorValue: "+sensorValue+ " newPaddlePos: " + nV+ " sensorPerc: "+sensorPerc);
+
+		transform.position = ( new Vector3(transform.position.x,transform.position.y,nV));
 		
 	}
 }
