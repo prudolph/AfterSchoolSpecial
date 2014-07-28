@@ -48,21 +48,21 @@ public class PhidgetsController: MonoBehaviour {
 		{
 			Debug.Log(ex.Description);
 		}
-		ifkit.sensors [0].Sensitivity = 3;
+		ifkit.sensors [0].Sensitivity = 0;
 		ifkit.outputs [0] = true;
 		
 		
 		originalPos = transform.position;
 		originalRot = transform.rotation;
 		
-		InvokeRepeating ("UpdateManual", 1f,0.5f);
+		InvokeRepeating ("UpdateManual", 1f,0.1f);
 	}
 	
 	void UpdateManual(){
 		if(paddlePositionList.Count == 0) return;
 		float pos = paddlePositionList.Average();
 		LeanTween.cancel(gameObject);
-		LeanTween.moveZ(gameObject, pos, .5f);
+		LeanTween.moveZ(gameObject, pos, .25f);
 		paddlePositionList.Clear();
 	}
 	
@@ -93,7 +93,7 @@ public class PhidgetsController: MonoBehaviour {
 		if (sensorValue < minSensorValue)sensorValue = minSensorValue;
 		
 		
-		if (sensorChanged) {
+		//if (sensorChanged) {
 
 			sensorChanged=false;
 
@@ -104,7 +104,7 @@ public class PhidgetsController: MonoBehaviour {
 			if(Mathf.Abs(transform.position.z -paddlePosition) > 1.0f ){
 				paddlePositionList.Add(Mathf.Floor(paddlePosition));				
 			}
-		}
+		//}
 	}
 	
 
