@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 using Phidgets; 
 using Phidgets.Events;
@@ -27,7 +29,12 @@ public class PhidgetsController: MonoBehaviour {
 	
 	bool sensorChanged =false;
 	
+	List<float> paddlePositionList;
+	
 	// Use this for initialization
+	void Awake(){
+		paddlePositionList = new List<float>();
+	}
 	void Start () {
 		ifkit = new InterfaceKit();
 		ifkit.SensorChange+= new SensorChangeEventHandler(ifKit_SensorChange);
@@ -48,13 +55,21 @@ public class PhidgetsController: MonoBehaviour {
 		originalPos = transform.position;
 		originalRot = transform.rotation;
 		
-		InvokeRepeating ("UpdateManual", 1f,0.0005f);
+		InvokeRepeating ("UpdateManual", 1f,0.5f);
+	}
+	
+	void UpdateManual(){
+		if(paddlePositionList.Count == 0) return;
+		float pos = paddlePositionList.Average();
+		LeanTween.cancel(gameObject);
+		LeanTween.moveZ(gameObject, pos, .5f);
+		paddlePositionList.Clear();
 	}
 	
 	
 	
 	// Update is called once per frame
-	void UpdateManual () {
+	void Update () {
 		
 		/*
         if (Input.GetButton (buttonUp)) {
@@ -84,17 +99,12 @@ public class PhidgetsController: MonoBehaviour {
 
 			sensorPercentage 		= (sensorValue - minSensorValue) / (maxSensorValue - minSensorValue);
 			float paddlePosition 	= ((maxPaddlePos - minPaddlePos) * sensorPercentage) - maxPaddlePos / 2.0f;
-
-
-
-		
-
 			Debug.Log ("sensorPercentage: " + sensorPercentage + " paddlePosition: " + paddlePosition + "  sensorValue " + sensorValue);
 
-			if(Mathf.Abs(transform.position.z -paddlePosition)>1.0f ){
-				transform.position = (new Vector3 (transform.position.x, transform.position.y, Mathf.Floor(paddlePosition)));
+			if(Mathf.Abs(transform.position.z -paddlePosition) > 1.0f ){
+				paddlePositionList.Add(Mathf.Floor(paddlePosition));				
 			}
-				}
+		}
 	}
 	
 
