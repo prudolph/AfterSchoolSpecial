@@ -29,6 +29,8 @@ public class PhidgetsController: MonoBehaviour {
 	
 	bool sensorChanged =false;
 	
+	public int playerIndex = 0;
+	
 	List<float> paddlePositionList;
 	
 	// Use this for initialization
@@ -48,18 +50,22 @@ public class PhidgetsController: MonoBehaviour {
 		{
 			Debug.Log(ex.Description);
 		}
-		ifkit.sensors [0].Sensitivity = 0;
-		ifkit.outputs [0] = true;
+		Debug.Log ("plyaer index "+playerIndex);
+		Debug.Log(ifkit.sensors.Count+" howmany sensors");
+		ifkit.sensors [playerIndex].Sensitivity = 0;
+		ifkit.outputs [playerIndex] = true;
 		
 		
 		originalPos = transform.position;
 		originalRot = transform.rotation;
 		
-		InvokeRepeating ("UpdateManual", 1f,0.1f);
+		InvokeRepeating ("UpdateManual", 1f,0.05f);
 	}
 	
 	void UpdateManual(){
+		
 		if(paddlePositionList.Count == 0) return;
+		
 		float pos = paddlePositionList.Average();
 		LeanTween.cancel(gameObject);
 		LeanTween.moveZ(gameObject, pos, .25f);
@@ -71,21 +77,10 @@ public class PhidgetsController: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		/*
-        if (Input.GetButton (buttonUp)) {
-            transform.Translate( new Vector3(0f,0,speed) * Time.deltaTime);     
-        }
-        if (Input.GetButton (buttonDown)) {
-            transform.Translate( new Vector3(0f,0,-speed) * Time.deltaTime);        
-        }
-*/
 		if (transform.position.y < - 4) {
 			transform.position = originalPos;   
 			transform.rotation = originalRot;
 		}
-		
-
-		
 		
 		
 		//Sanitize sensor value
@@ -99,7 +94,7 @@ public class PhidgetsController: MonoBehaviour {
 
 			sensorPercentage 		= (sensorValue - minSensorValue) / (maxSensorValue - minSensorValue);
 			float paddlePosition 	= ((maxPaddlePos - minPaddlePos) * sensorPercentage) - maxPaddlePos / 2.0f;
-			Debug.Log ("sensorPercentage: " + sensorPercentage + " paddlePosition: " + paddlePosition + "  sensorValue " + sensorValue);
+			//Debug.Log ("sensorPercentage: " + sensorPercentage + " paddlePosition: " + paddlePosition + "  sensorValue " + sensorValue);
 
 			if(Mathf.Abs(transform.position.z -paddlePosition) > 1.0f ){
 				paddlePositionList.Add(Mathf.Floor(paddlePosition));				
@@ -112,7 +107,7 @@ public class PhidgetsController: MonoBehaviour {
 
 	void ifKit_SensorChange(object sender, SensorChangeEventArgs e)
 	{
-		if (e.Index == 0) {
+		if (e.Index == playerIndex) {
 			sensorValue =  e.Value;
 			sensorChanged=true;
 		}
