@@ -25,7 +25,7 @@ public class PhidgetsController: MonoBehaviour {
 	float maxPaddlePos = 18f;
 	float offsetPos = -9f;
 	
-	
+	bool sensorChanged =false;
 	
 	// Use this for initialization
 	void Start () {
@@ -41,14 +41,14 @@ public class PhidgetsController: MonoBehaviour {
 		{
 			Debug.Log(ex.Description);
 		}
-		ifkit.sensors [0].Sensitivity = 10;
+		ifkit.sensors [0].Sensitivity = 3;
 		ifkit.outputs [0] = true;
 		
 		
 		originalPos = transform.position;
 		originalRot = transform.rotation;
 		
-		InvokeRepeating ("UpdateManual", 1f,0.05f);
+		InvokeRepeating ("UpdateManual", 1f,0.0005f);
 	}
 	
 	
@@ -69,18 +69,7 @@ public class PhidgetsController: MonoBehaviour {
 			transform.rotation = originalRot;
 		}
 		
-		/*
-        int oldsensorValue = sensorValue;
-        try{ 
-            ifkit.outputs [0] = true;
-            sensorValue = ifkit.sensors [0].Value;
-            
-            ifkit.outputs [0] = false;
-        }catch (PhidgetException ex)
-        {
-            //Debug.Log(ex.Description);
-        }
-        */
+
 		
 		
 		
@@ -89,26 +78,33 @@ public class PhidgetsController: MonoBehaviour {
 		if (sensorValue < minSensorValue)sensorValue = minSensorValue;
 		
 		
+		if (sensorChanged) {
+
+			sensorChanged=false;
+
+			sensorPercentage 		= (sensorValue - minSensorValue) / (maxSensorValue - minSensorValue);
+			float paddlePosition 	= ((maxPaddlePos - minPaddlePos) * sensorPercentage) - maxPaddlePos / 2.0f;
+
+
+
 		
-		sensorPercentage = (sensorValue - minSensorValue) / (maxSensorValue - minSensorValue);
-		float paddlePosition = (sensorPercentage * (maxPaddlePos - minPaddlePos)) + offsetPos;
-		
-		
-		
-		float nV = paddlePosition;
-		
-		//  Debug.Log("sendorValue: "+sensorValue+ " newPaddlePos: " + nV+ " sensorPerc: "+sensorPerc);
-		
-		transform.position = ( new Vector3(transform.position.x,transform.position.y,nV));
-		
+
+			Debug.Log ("sensorPercentage: " + sensorPercentage + " paddlePosition: " + paddlePosition + "  sensorValue " + sensorValue);
+
+			if(Mathf.Abs(transform.position.z -paddlePosition)>1.0f ){
+				transform.position = (new Vector3 (transform.position.x, transform.position.y, Mathf.Floor(paddlePosition)));
+			}
+				}
 	}
 	
-	
+
+
+
 	void ifKit_SensorChange(object sender, SensorChangeEventArgs e)
 	{
 		if (e.Index == 0) {
 			sensorValue =  e.Value;
-			Debug.Log ("Sensor index :" + e.Index + " Sensor value " + e.Value);
+			sensorChanged=true;
 		}
 	}
 }
